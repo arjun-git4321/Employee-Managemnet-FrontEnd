@@ -61,3 +61,4 @@ export const DepartmentButtons=({Id,onDepartmentDelete})=>{
         </div>
     )
 }
+

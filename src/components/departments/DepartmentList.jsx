@@ -5,11 +5,9 @@ import { colums, DepartmentButtons } from '../../utils/DepartmentHelper';
 import axios from 'axios';
 
 
-
-
 const DepartmentList=()=>{
     const[department,setDepartment]=useState([])
-    const[loading,setDepLoading]=useState(false)
+    const[loading,setDepLoading]=useState(true)
     const[filteredDepartments,setFilteredDepartments]=useState([])
     const onDepartmentDelete=async(id)=>{
         const data=department.filter(dep => dep._id !== id)
@@ -65,7 +63,14 @@ const DepartmentList=()=>{
     }
 
     return(
-        <>{loading ? <div>Loading....</div> : 
+        <>{loading ? <div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+            <div className=' space-x-3 border-2 border-red-300'></div>
+        </div> : 
         <div className='p-5'>
             <div className='text-center'>
                 <h3 className='text-2xl font-bold'>Manage Departments</h3>

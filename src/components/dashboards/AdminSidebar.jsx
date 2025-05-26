@@ -22,8 +22,9 @@ const AdminSidebar=()=>{
                 <AiFillDashboard />
                 <span>DashBoard</span>
                 </NavLink>
-                <NavLink to="/admin-dashboard"
-                className='flex items-center sapce-x-4 py-2.5 px-4 rounded'>
+                <NavLink to="/admin-dashboard/employees"
+                
+                className={({isActive})=>`${isActive ? "bg-teal-500":""} flex items-center sapce-x-4 py-2.5 px-4 rounded`}>
                 <FaUsers />
                 <span>Employee</span>
                 </NavLink>
