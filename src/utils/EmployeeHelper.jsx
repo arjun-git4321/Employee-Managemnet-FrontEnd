@@ -16,19 +16,23 @@ import { useNavigate } from 'react-router-dom'
         sortable:true,
         width:"130px"
     },
-    {
+   {
   name: "Image",
-  cell: (row) => (
+  selector: (row) => (
     <img
       src={`http://localhost:3000/${row.profileImage}`}
       alt="Profile"
-      width="40"
-      height="40"
-      style={{ borderRadius: "50%" }}
-      onError={(e) => { e.target.src = "/default-profile.png"; }} // optional fallback
+      className="w-10 h-10 rounded-full object-cover"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "/default-profile.png"; // fallback image
+      }}
     />
   ),
-  width: "100px"
+  width: "100px",
+  ignoreRowClick: true,
+  allowOverflow: true,
+  button: true,
 },
     {
         name:"Department",

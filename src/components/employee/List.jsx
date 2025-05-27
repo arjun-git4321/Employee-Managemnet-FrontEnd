@@ -8,6 +8,7 @@ import axios from 'axios';
 const List=()=>{
     const[employees,setEmployees]=useState([])
     const[EmpLoading,setEmpLoading]=useState(false)
+    const[filtered,setFiltered]=useState([])
 
 
 
@@ -38,7 +39,8 @@ const List=()=>{
                         ))
                         // console.log("Mapped employee data:", data);
 
-                        setEmployees(data)   
+                        setEmployees(data)
+                        setFiltered(data)
     
                     }
 
@@ -57,6 +59,13 @@ const List=()=>{
             fetchEmployees();
         },[])
 
+        const handleFiltered=(e)=>{
+            const records=employees.filter((emp)=>(
+                emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+            ))
+            setFiltered(records)
+        }
+
 
 
     return(
@@ -65,11 +74,12 @@ const List=()=>{
                 <h3 className='text-2xl font-bold'>Manage Employees</h3>
             </div>
             <div className='flex justify-between items-center px-5'>
-                <input type='text' placeholder='search by department' className='px-4 py-0.5 border'></input>
+                <input type='text' placeholder='search by department' className='px-4 py-0.5 border'
+                onChange={handleFiltered}></input>
                 <Link to='/admin-dashboard/add-employee' className='px-4 py-1 bg-blue-500 rounded text-white'>Add Employees</Link>
             </div>
-            <div>
-                {EmpLoading ? <p>Loading...</p> : <DataTable columns={columns} data={employees} />}
+            <div className='mt-6'>
+                {EmpLoading ? <p>Loading...</p> : <DataTable columns={columns} data={filtered} pagination/>}
             </div>
         </div>
     )
