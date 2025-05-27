@@ -17,10 +17,19 @@ import { useNavigate } from 'react-router-dom'
         width:"130px"
     },
     {
-        name:"Image",
-        selector:(row)=>row.profileImage,
-        width:"100px"
-    },
+  name: "Image",
+  cell: (row) => (
+    <img
+      src={`http://localhost:3000/${row.profileImage}`}
+      alt="Profile"
+      width="40"
+      height="40"
+      style={{ borderRadius: "50%" }}
+      onError={(e) => { e.target.src = "/default-profile.png"; }} // optional fallback
+    />
+  ),
+  width: "100px"
+},
     {
         name:"Department",
         selector:(row)=>row.dept_name,
@@ -75,10 +84,10 @@ export const fetchDepartments=async()=>{
     return(
         <div className='flex space-x-3 w-70px'>
             <button className='px-4 py-1 bg-blue-300 rounded'
-                onClick={()=> navigate(`/admin-dashboard/employees/${Id}`)}
-            
+                onClick={()=> navigate(`/admin-dashboard/employees/${Id}`)}          
             >View</button>
-            <button className='px-4 py-1 bg-red-600 text-white rounded' 
+            <button className='px-4 py-1 bg-red-600 text-white rounded'
+                onClick={()=> navigate(`/admin-dashboard/employees/edit/${Id}`)}
             
             >Edit</button>
             <button className='px-4 py-1 bg-red-600 text-white rounded' 
