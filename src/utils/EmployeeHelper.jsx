@@ -83,6 +83,36 @@ export const fetchDepartments=async()=>{
 }
 
 
+//Employee for salary form 
+export const fetchEmployees=async(id)=>{
+    let employees
+    try{
+        const token=localStorage.getItem("token")
+        const response=await axios.get(`http://localhost:3000/api/v1/employee/department/${id}`,{
+            headers:{
+                "Authorization":`Bearer ${token}`
+                
+            }
+        })
+        console.log(response.data && Array.isArray(response.data.employees))
+        if(response.data.success){
+            employees=response.data.employees
+            
+
+        }
+    }
+
+    catch(error){
+        console.error("API Error in fetchEmployees:", error);
+        if(error.response && !error.response.data.success){
+            alert(error.response.data.error);
+        }
+
+    }
+    return employees
+}
+
+
  export const EmployeeButtons=({Id})=>{
     const navigate=useNavigate();
     return(
@@ -94,7 +124,8 @@ export const fetchDepartments=async()=>{
                 onClick={()=> navigate(`/admin-dashboard/employees/edit/${Id}`)}
             
             >Edit</button>
-            <button className='px-4 py-1 bg-red-600 text-white rounded' 
+            <button className='px-4 py-1 bg-red-600 text-white rounded'
+                onClick={()=> navigate(`/admin-dashboard/employees/salary/${Id}`)} 
             
             >Salary</button>
             <button className='px-4 py-1 bg-yellow-600 text-white rounded'

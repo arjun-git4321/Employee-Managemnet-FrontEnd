@@ -40,8 +40,11 @@ const AdminSidebar=()=>{
                 <FcLeave />
                 <span>Leave</span>
                 </NavLink>
-                <NavLink to="/admin-dashboard"
-                className='flex items-center sapce-x-4 py-2.5 px-4 rounded'>
+                <NavLink to="/admin-dashboard/salary/add"
+                className={({isActive})=>`${isActive ? "bg-teal-500":""} flex items-center sapce-x-4 py-2.5 px-4 rounded`}
+                end
+                
+                >
                 <FaMoneyBill />
                 <span>Salary</span>
                 </NavLink>
